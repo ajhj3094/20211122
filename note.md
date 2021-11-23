@@ -26,4 +26,35 @@ linebot
    (換行不須逗號、需使用'等於')  
    例如 : CHANNEL_ID=""  
    + 建立 .env.sample 並忽略 .env
-5. npm i axios
+5. 安裝 axios :  
+   + npm i axios  
+   + axios 是 AJAX 技術，參考 Ch.18
+6. 強制語法風格一致化 :  
+   + eslint 是 npm 的一個套件。
+   + vs code 的 eslint 是幫助我們使用 eslint 此套件的擴充功能。
+   + 兩種安裝語法相同：  
+   npm i eslint --save-dev  
+   npm i eslint -D 
+   + --save-dev 或 -D : 開發用套件，代表只有這個機器人的開發環境才會用到。
+   + package.json 會新增一項開發環境套件 devDependencies  
+   + 之後寫 node.js 都會安裝，所以之後寫 API、Vue 都會用到，之後工作也會有類似的語法風格要遵循。
+   + 安裝後操作：  
+   F1(create eslint configuration) -> style -> esm(JS modules) -> none -> No -> Node(用空白鍵選擇) -> guide -> standard -> JSON -> Yes
+   + 終端機留一個就好其他刪掉。
+   + .eslintrc.json -> "ecmaVersion":13 改成 12
+7. 安裝 nodemon :  
+   + 原本有改動就要 ctrl+C 把 node.js 關掉重新跑一次，有了 nodemon 就能自動偵測檔案變更，自動幫你重新載入 node.js
+8. 安裝 ngrok :  
+   + 因為我們 localhost 沒有 https，而 line 有規定機器人的服務網址必須要有 https (s 代表加密)，所以直接跟 line 請求會被擋掉；而 ngrok 有 https，所以我們可以透過 ngrok 做轉發，可以獲得一個免費的暫時 https 網址，有效時間大概 30分鐘，每次重開網址ID會不同。不過 ngrok 偶爾會掉資料，但沒辦法只能這樣測。
+   + npm i -D nodemon ngrok
+   + 之後"正式環境"用不到 nodemon 和 ngrok 的套件，所以這邊才用 -D (開發用：代表只有開發環境才會用到)，因為之後上 server 不會有 vs code 給你編輯檔案所以用不到 nodemon，之後的 server 也會有 https 所以也用不到 ngrok。
+9. 定義指令：
+   + package.json -> scripts -> test
+   + 將 "test": ... 此行改為：  
+   "dev":"nodemon index.js",  
+   "start":"node index.js"
+   + dev：開發使用，本機的指令。
+   + start：正式環境使用，之後上雲端 server 時，預設是會執行 start 的指令，所以這邊的指令一定要叫做 start  
+   + npm run dev  
+     每次變更都會重載，讓開發方便不用一直 ctrl+c 重開
+   + npm run start
