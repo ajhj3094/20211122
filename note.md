@@ -26,6 +26,7 @@ linebot
    (換行不須逗號、需使用'等於')  
    例如 : CHANNEL_ID=""  
    + 建立 .env.sample 並忽略 .env
+   + 如果開啟機器人後突然要更改 .env 檔，記得要將機器人退出 ctrl + c，存檔後再開一次機器人，因為 nodemon 不會幫你自動更新 .env 的更動。
 5. 安裝 axios :  
    + npm i axios  
    + axios 是 AJAX 技術，參考 Ch.18
@@ -58,3 +59,13 @@ linebot
    + npm run dev  
      每次變更都會重載，讓開發方便不用一直 ctrl+c 重開
    + npm run start
+   + 可以在 index.js 寫 console 看看兩者差異
+10. import 'dotenv/config'  
+    import linebot from 'linebot'
+    ...
+
+11. npm run dev (機器人啟動) -> 新增終端機 (開啟機器人的終端機和 ngrok 的終端機要同時開著，我們要去 ngrok 做轉送) -> ngrok http 3000 (若找不到需 npm un ngrok -> npm i -g ngrok，還是找不到就 npm un -g ngrok，直接去 ngrok 官網下載) -> 複製 ngrok 終端機最底下的 https/.../io 網址，注意每次重開 ngrok 網址會不一樣，複製時 ctrl + c 小心不要跳出 -> 貼到 Webhook URL -> 認證成功就+好友
+12. 這時候傳什麼機器人就會回傳什麼，現在來抓資料看看
+13. 找到開放資料後，import axios from 'axios'
+14. 如果在群組內傳訊息，機器人會以為你在跟它要資料，這時候可以用不同的開頭來寫判斷式，例如傳給機器人: !name 微熱山丘 -> 新北市、!cost 屋馬 -> $1800
+15. 
